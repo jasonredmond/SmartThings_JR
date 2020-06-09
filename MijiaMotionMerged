@@ -31,28 +31,29 @@ metadata {
         capability "Sensor"
         capability "Health Check"
     }
-
-	preferences {
+    
+  	preferences {
 		input "forceConfig", "boolean", title: "Toggle ONCE to force device configuration (any position will force a config)"
 	}
 
 	fingerprint profileId: "0104", inClusters: "0000,0400,0003,0001", outClusters: "0003", manufacturer: "LUMI", model: "lumi.sen_ill.mgl01", deviceJoinName: "Xiaomi Mijia Smart Home Light Sensor"
-    
+      
     tiles(scale: 2) {
 		multiAttributeTile(name:"illuminance", type: "generic", width: 6, height: 4){
 			tileAttribute("device.illuminance", key: "PRIMARY_CONTROL") {
 				attributeState("illuminance", label:'${currentValue} LUX', icon:"st.illuminance.illuminance.bright", backgroundColor:"#999999")
 			}
 		}
+		valueTile("battery", "device.battery", width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
+			state "default", label:'${currentValue}% battery', unit:"%"
+		}
+		valueTile("configure", "device.illuminance", width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
+			state "default", action:"configuration.configure", icon:"st.secondary.configure"
+		}
 		standardTile("refresh", "device.illuminance", width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
 			state "default", label: 'Refresh', action:"refresh.refresh", icon:"st.secondary.refresh-icon"
 		}
-		standardTile("configure", "device.illuminance", width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
-			state "default", action:"configuration.configure", icon:"st.secondary.configure"
-		}
-		standardTile("battery", "device.battery", width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
-			state "default", label:'${currentValue}% battery', unit:"%"
-		}
+		
 		main(["illuminance"])
 		details(["illuminance", "battery", "refresh", "configure"])
 	}
