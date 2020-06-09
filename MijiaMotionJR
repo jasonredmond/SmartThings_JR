@@ -24,7 +24,7 @@
 import physicalgraph.zigbee.zcl.DataType
 
 metadata {
-    definition (name: "My Xiaomi Mijia Smart Light Sensor", namespace: "jsconstantelos", author: "jsconstantelos") {
+    definition (name: "JR Xiaomi Mijia Smart Light Sensor", namespace: "JSC&JBR", author: "JSC&JBR") {
         capability "Illuminance Measurement"
         capability "Configuration"
         capability "Refresh"
